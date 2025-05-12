@@ -1,0 +1,186 @@
+{
+    "contracts": {
+        "FundAllocation.sol": {
+            "FundAllocation": {
+                "abi": [
+                    {
+                        "inputs": [],
+                        "stateMutability": "nonpayable",
+                        "type": "constructor"
+                    },
+                    {
+                        "anonymous": false,
+                        "inputs": [
+                            {
+                                "indexed": true,
+                                "internalType": "address",
+                                "name": "organization",
+                                "type": "address"
+                            },
+                            {
+                                "indexed": false,
+                                "internalType": "uint256",
+                                "name": "amount",
+                                "type": "uint256"
+                            }
+                        ],
+                        "name": "FundApproved",
+                        "type": "event"
+                    },
+                    {
+                        "anonymous": false,
+                        "inputs": [
+                            {
+                                "indexed": true,
+                                "internalType": "address",
+                                "name": "organization",
+                                "type": "address"
+                            },
+                            {
+                                "indexed": false,
+                                "internalType": "string",
+                                "name": "reason",
+                                "type": "string"
+                            }
+                        ],
+                        "name": "FundRejected",
+                        "type": "event"
+                    },
+                    {
+                        "anonymous": false,
+                        "inputs": [
+                            {
+                                "indexed": true,
+                                "internalType": "address",
+                                "name": "organization",
+                                "type": "address"
+                            },
+                            {
+                                "indexed": false,
+                                "internalType": "uint256",
+                                "name": "amount",
+                                "type": "uint256"
+                            }
+                        ],
+                        "name": "FundRequested",
+                        "type": "event"
+                    },
+                    {
+                        "inputs": [
+                            {
+                                "internalType": "address",
+                                "name": "",
+                                "type": "address"
+                            }
+                        ],
+                        "name": "allocatedFunds",
+                        "outputs": [
+                            {
+                                "internalType": "uint256",
+                                "name": "",
+                                "type": "uint256"
+                            }
+                        ],
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [
+                            {
+                                "internalType": "address",
+                                "name": "organization",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "amount",
+                                "type": "uint256"
+                            }
+                        ],
+                        "name": "approveFund",
+                        "outputs": [],
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [
+                            {
+                                "internalType": "address",
+                                "name": "organization",
+                                "type": "address"
+                            }
+                        ],
+                        "name": "getAllocatedFunds",
+                        "outputs": [
+                            {
+                                "internalType": "uint256",
+                                "name": "",
+                                "type": "uint256"
+                            }
+                        ],
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [
+                            {
+                                "internalType": "address",
+                                "name": "organization",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "reason",
+                                "type": "string"
+                            }
+                        ],
+                        "name": "rejectFund",
+                        "outputs": [],
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [
+                            {
+                                "internalType": "uint256",
+                                "name": "amount",
+                                "type": "uint256"
+                            }
+                        ],
+                        "name": "requestFund",
+                        "outputs": [],
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [],
+                        "name": "stateGovernment",
+                        "outputs": [
+                            {
+                                "internalType": "address",
+                                "name": "",
+                                "type": "address"
+                            }
+                        ],
+                        "stateMutability": "view",
+                        "type": "function"
+                    }
+                ],
+                "evm": {
+                    "bytecode": {
+                        "generatedSources": [],
+                        "linkReferences": {},
+                        "object": "608060405234801561001057600080fd5b50600080546001600160a01b031916331790556104d6806100326000396000f3fe608060405234801561001057600080fd5b50600436106100625760003560e01c806320a4b87f1461006757806328e6e8631461007c5780632f1312541461009a5780637985c103146100ba578063cc1d6f63146100cd578063d10c1096146100e0575b600080fd5b61007a6100753660046102b9565b6100f3565b005b61008461016b565b60405161009191906103ae565b60405180910390f35b6100ad6100a8366004610298565b61017a565b604051610091919061045d565b61007a6100c836600461036d565b610199565b61007a6100db366004610396565b61022b565b6100ad6100ee366004610298565b61026f565b6000546001600160a01b031633146101265760405162461bcd60e51b815260040161011d90610415565b60405180910390fd5b816001600160a01b03167f6b61e4a2b5b979c9a00883c081a76a8defc2337983d59e2eb842ad71a7d3b5d38260405161015f91906103c2565b60405180910390a25050565b6000546001600160a01b031681565b6001600160a01b0381166000908152600160205260409020545b919050565b6000546001600160a01b031633146101c35760405162461bcd60e51b815260040161011d90610415565b6001600160a01b038216600090815260016020526040812080548392906101eb908490610466565b92505081905550816001600160a01b03167feae1671d2960127bc3f7327a91f58900dd6350954335b6f2fdd7eef156b53a6c8260405161015f919061045d565b336001600160a01b03167fc01885824d09db2a2cad0d38d82321fdb9026a98b421d8ffdacb61e52310750d82604051610264919061045d565b60405180910390a250565b60016020526000908152604090205481565b80356001600160a01b038116811461019457600080fd5b6000602082840312156102a9578081fd5b6102b282610281565b9392505050565b600080604083850312156102cb578081fd5b6102d483610281565b915060208084013567ffffffffffffffff808211156102f1578384fd5b818601915086601f830112610304578384fd5b8135818111156103165761031661048a565b604051601f8201601f19168101850183811182821017156103395761033961048a565b604052818152838201850189101561034f578586fd5b81858501868301378585838301015280955050505050509250929050565b6000806040838503121561037f578182fd5b61038883610281565b946020939093013593505050565b6000602082840312156103a7578081fd5b5035919050565b6001600160a01b0391909116815260200190565b6000602080835283518082850152825b818110156103ee578581018301518582016040015282016103d2565b818111156103ff5783604083870101525b50601f01601f1916929092016040019392505050565b60208082526028908201527f4f6e6c7920676f7665726e6d656e742063616e20617070726f76652f72656a6560408201526763742066756e647360c01b606082015260800190565b90815260200190565b6000821982111561048557634e487b7160e01b81526011600452602481fd5b500190565b634e487b7160e01b600052604160045260246000fdfea26469706673582212204c4cf00ad8f4761d4e6734121d6a9abc72a4d7ee3226608d718315f51b8df7e364736f6c63430008000033",
+                        "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x0 DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT AND CALLER OR SWAP1 SSTORE PUSH2 0x4D6 DUP1 PUSH2 0x32 PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x62 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x20A4B87F EQ PUSH2 0x67 JUMPI DUP1 PUSH4 0x28E6E863 EQ PUSH2 0x7C JUMPI DUP1 PUSH4 0x2F131254 EQ PUSH2 0x9A JUMPI DUP1 PUSH4 0x7985C103 EQ PUSH2 0xBA JUMPI DUP1 PUSH4 0xCC1D6F63 EQ PUSH2 0xCD JUMPI DUP1 PUSH4 0xD10C1096 EQ PUSH2 0xE0 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x7A PUSH2 0x75 CALLDATASIZE PUSH1 0x4 PUSH2 0x2B9 JUMP JUMPDEST PUSH2 0xF3 JUMP JUMPDEST STOP JUMPDEST PUSH2 0x84 PUSH2 0x16B JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH2 0x91 SWAP2 SWAP1 PUSH2 0x3AE JUMP JUMPDEST PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST PUSH2 0xAD PUSH2 0xA8 CALLDATASIZE PUSH1 0x4 PUSH2 0x298 JUMP JUMPDEST PUSH2 0x17A JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH2 0x91 SWAP2 SWAP1 PUSH2 0x45D JUMP JUMPDEST PUSH2 0x7A PUSH2 0xC8 CALLDATASIZE PUSH1 0x4 PUSH2 0x36D JUMP JUMPDEST PUSH2 0x199 JUMP JUMPDEST PUSH2 0x7A PUSH2 0xDB CALLDATASIZE PUSH1 0x4 PUSH2 0x396 JUMP JUMPDEST PUSH2 0x22B JUMP JUMPDEST PUSH2 0xAD PUSH2 0xEE CALLDATASIZE PUSH1 0x4 PUSH2 0x298 JUMP JUMPDEST PUSH2 0x26F JUMP JUMPDEST PUSH1 0x0 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND CALLER EQ PUSH2 0x126 JUMPI PUSH1 0x40 MLOAD PUSH3 0x461BCD PUSH1 0xE5 SHL DUP2 MSTORE PUSH1 0x4 ADD PUSH2 0x11D SWAP1 PUSH2 0x415 JUMP JUMPDEST PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 REVERT JUMPDEST DUP2 PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND PUSH32 0x6B61E4A2B5B979C9A00883C081A76A8DEFC2337983D59E2EB842AD71A7D3B5D3 DUP3 PUSH1 0x40 MLOAD PUSH2 0x15F SWAP2 SWAP1 PUSH2 0x3C2 JUMP JUMPDEST PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 LOG2 POP POP JUMP JUMPDEST PUSH1 0x0 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND DUP2 JUMP JUMPDEST PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP2 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x1 PUSH1 0x20 MSTORE PUSH1 0x40 SWAP1 KECCAK256 SLOAD JUMPDEST SWAP2 SWAP1 POP JUMP JUMPDEST PUSH1 0x0 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND CALLER EQ PUSH2 0x1C3 JUMPI PUSH1 0x40 MLOAD PUSH3 0x461BCD PUSH1 0xE5 SHL DUP2 MSTORE PUSH1 0x4 ADD PUSH2 0x11D SWAP1 PUSH2 0x415 JUMP JUMPDEST PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP3 AND PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x1 PUSH1 0x20 MSTORE PUSH1 0x40 DUP2 KECCAK256 DUP1 SLOAD DUP4 SWAP3 SWAP1 PUSH2 0x1EB SWAP1 DUP5 SWAP1 PUSH2 0x466 JUMP JUMPDEST SWAP3 POP POP DUP2 SWAP1 SSTORE POP DUP2 PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND PUSH32 0xEAE1671D2960127BC3F7327A91F58900DD6350954335B6F2FDD7EEF156B53A6C DUP3 PUSH1 0x40 MLOAD PUSH2 0x15F SWAP2 SWAP1 PUSH2 0x45D JUMP JUMPDEST CALLER PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND PUSH32 0xC01885824D09DB2A2CAD0D38D82321FDB9026A98B421D8FFDACB61E52310750D DUP3 PUSH1 0x40 MLOAD PUSH2 0x264 SWAP2 SWAP1 PUSH2 0x45D JUMP JUMPDEST PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 LOG2 POP JUMP JUMPDEST PUSH1 0x1 PUSH1 0x20 MSTORE PUSH1 0x0 SWAP1 DUP2 MSTORE PUSH1 0x40 SWAP1 KECCAK256 SLOAD DUP2 JUMP JUMPDEST DUP1 CALLDATALOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP2 AND DUP2 EQ PUSH2 0x194 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0x2A9 JUMPI DUP1 DUP2 REVERT JUMPDEST PUSH2 0x2B2 DUP3 PUSH2 0x281 JUMP JUMPDEST SWAP4 SWAP3 POP POP POP JUMP JUMPDEST PUSH1 0x0 DUP1 PUSH1 0x40 DUP4 DUP6 SUB SLT ISZERO PUSH2 0x2CB JUMPI DUP1 DUP2 REVERT JUMPDEST PUSH2 0x2D4 DUP4 PUSH2 0x281 JUMP JUMPDEST SWAP2 POP PUSH1 0x20 DUP1 DUP5 ADD CALLDATALOAD PUSH8 0xFFFFFFFFFFFFFFFF DUP1 DUP3 GT ISZERO PUSH2 0x2F1 JUMPI DUP4 DUP5 REVERT JUMPDEST DUP2 DUP7 ADD SWAP2 POP DUP7 PUSH1 0x1F DUP4 ADD SLT PUSH2 0x304 JUMPI DUP4 DUP5 REVERT JUMPDEST DUP2 CALLDATALOAD DUP2 DUP2 GT ISZERO PUSH2 0x316 JUMPI PUSH2 0x316 PUSH2 0x48A JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH1 0x1F DUP3 ADD PUSH1 0x1F NOT AND DUP2 ADD DUP6 ADD DUP4 DUP2 GT DUP3 DUP3 LT OR ISZERO PUSH2 0x339 JUMPI PUSH2 0x339 PUSH2 0x48A JUMP JUMPDEST PUSH1 0x40 MSTORE DUP2 DUP2 MSTORE DUP4 DUP3 ADD DUP6 ADD DUP10 LT ISZERO PUSH2 0x34F JUMPI DUP6 DUP7 REVERT JUMPDEST DUP2 DUP6 DUP6 ADD DUP7 DUP4 ADD CALLDATACOPY DUP6 DUP6 DUP4 DUP4 ADD ADD MSTORE DUP1 SWAP6 POP POP POP POP POP POP SWAP3 POP SWAP3 SWAP1 POP JUMP JUMPDEST PUSH1 0x0 DUP1 PUSH1 0x40 DUP4 DUP6 SUB SLT ISZERO PUSH2 0x37F JUMPI DUP2 DUP3 REVERT JUMPDEST PUSH2 0x388 DUP4 PUSH2 0x281 JUMP JUMPDEST SWAP5 PUSH1 0x20 SWAP4 SWAP1 SWAP4 ADD CALLDATALOAD SWAP4 POP POP POP JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0x3A7 JUMPI DUP1 DUP2 REVERT JUMPDEST POP CALLDATALOAD SWAP2 SWAP1 POP JUMP JUMPDEST PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP2 SWAP1 SWAP2 AND DUP2 MSTORE PUSH1 0x20 ADD SWAP1 JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP1 DUP4 MSTORE DUP4 MLOAD DUP1 DUP3 DUP6 ADD MSTORE DUP3 JUMPDEST DUP2 DUP2 LT ISZERO PUSH2 0x3EE JUMPI DUP6 DUP2 ADD DUP4 ADD MLOAD DUP6 DUP3 ADD PUSH1 0x40 ADD MSTORE DUP3 ADD PUSH2 0x3D2 JUMP JUMPDEST DUP2 DUP2 GT ISZERO PUSH2 0x3FF JUMPI DUP4 PUSH1 0x40 DUP4 DUP8 ADD ADD MSTORE JUMPDEST POP PUSH1 0x1F ADD PUSH1 0x1F NOT AND SWAP3 SWAP1 SWAP3 ADD PUSH1 0x40 ADD SWAP4 SWAP3 POP POP POP JUMP JUMPDEST PUSH1 0x20 DUP1 DUP3 MSTORE PUSH1 0x28 SWAP1 DUP3 ADD MSTORE PUSH32 0x4F6E6C7920676F7665726E6D656E742063616E20617070726F76652F72656A65 PUSH1 0x40 DUP3 ADD MSTORE PUSH8 0x63742066756E6473 PUSH1 0xC0 SHL PUSH1 0x60 DUP3 ADD MSTORE PUSH1 0x80 ADD SWAP1 JUMP JUMPDEST SWAP1 DUP2 MSTORE PUSH1 0x20 ADD SWAP1 JUMP JUMPDEST PUSH1 0x0 DUP3 NOT DUP3 GT ISZERO PUSH2 0x485 JUMPI PUSH4 0x4E487B71 PUSH1 0xE0 SHL DUP2 MSTORE PUSH1 0x11 PUSH1 0x4 MSTORE PUSH1 0x24 DUP2 REVERT JUMPDEST POP ADD SWAP1 JUMP JUMPDEST PUSH4 0x4E487B71 PUSH1 0xE0 SHL PUSH1 0x0 MSTORE PUSH1 0x41 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH1 0x0 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0x4C 0x4C CREATE EXP 0xD8 DELEGATECALL PUSH23 0x1D4E6734121D6A9ABC72A4D7EE3226608D718315F51B8D 0xF7 0xE3 PUSH5 0x736F6C6343 STOP ADDMOD STOP STOP CALLER ",
+                        "sourceMap": "79:1117:0:-:0;;;554:59;;;;;;;;;-1:-1:-1;578:15:0;:28;;-1:-1:-1;;;;;;578:28:0;596:10;578:28;;;79:1117;;;;;;"
+                    }
+                }
+            }
+        }
+    },
+    "sources": {
+        "FundAllocation.sol": {
+            "id": 0
+        }
+    }
+}

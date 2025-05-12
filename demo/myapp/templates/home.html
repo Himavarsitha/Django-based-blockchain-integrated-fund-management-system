@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Fund Management{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Welcome to the Fund Management System</h1>
+    <p>A platform for managing fund allocations efficiently between organizations and government bodies.</p>
+    
+    <div class="mt-4">
+        <a href="{% url 'organization_signup' %}" class="btn btn-primary btn-lg">Sign up as an Organization</a>
+        <a href="{% url 'government_signup' %}" class="btn btn-success btn-lg">Sign up as a Government Official</a>
+        <a href="{% url 'user_signup' %}" class="btn btn-info btn-lg">Signup as USER</a>
+    </div>
+
+    <hr>
+
+    <p>Already have an account? Log in below.</p>
+    
+    <a href="{% url 'user_login' %}" class="btn btn-secondary btn-lg">Login</a>
+</div>
+{% endblock %}

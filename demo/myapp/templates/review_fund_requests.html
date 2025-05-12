@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Review Fund Request</h2>
+
+    <div class="card p-4 shadow-sm">
+        <h4>Request ID: {{ fund_request.id }}</h4>
+        <p><strong>Organization:</strong> {{ fund_request.organization.name }}</p>
+        <p><strong>Amount Requested:</strong> ₹{{ fund_request.amount_requested }}</p>
+        <p><strong>Status:</strong> 
+            <span class="badge {% if fund_request.status == 'PENDING' %}bg-warning
+                             {% elif fund_request.status == 'APPROVED' %}bg-success
+                             {% else %}bg-danger{% endif %}">{{ fund_request.status }}</span>
+        </p>
+        <p><strong>Description:</strong> {{ fund_request.description }}</p>
+        <p><strong>Requested At:</strong> {{ fund_request.requested_at }}</p>
+
+        {% if fund_request.blockchain_reference %}
+            <p><strong>Blockchain TXN:</strong> 
+                <a href="https://etherscan.io/tx/{{ fund_request.blockchain_reference }}" target="_blank">
+                    {{ fund_request.blockchain_reference }}
+                </a>
+            </p>
+        {% endif %}
+    </div>
+
+    {% if fund_request.status == "PENDING" %}
+    <div class="mt-4">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" name="status" value="APPROVED" class="btn btn-success me-2"
+                    onclick="return confirm('Are you sure you want to APPROVE this request?');">✅ Approve</button>
+
+            <button type="submit" name="status" value="REJECTED" class="btn btn-danger"
+                    onclick="return confirm('Are you sure you want to REJECT this request?');">❌ Reject</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="alert alert-info mt-4">
+        This request has already been <strong>{{ fund_request.status }}</strong>.
+    </div>
+    {% endif %}
+
+    <div class="mt-4">
+        <a href="{% url 'state_dashboard' %}" class="btn btn-secondary">← Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

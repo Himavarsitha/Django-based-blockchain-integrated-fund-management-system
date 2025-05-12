@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}State Government Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">State Government Dashboard</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- KPIs -->
+    <div class="row mb-4 text-center">
+        <div class="col-md-3 mb-3">
+            <div class="card shadow-sm p-3">
+                <h5>Total Funds Allocated</h5>
+                <p class="fs-4 text-success">₹{{ total_allocated_funds }}</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card shadow-sm p-3">
+                <h5>Total Fund Requests</h5>
+                <p class="fs-4">{{ total_requests }}</p>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <div class="card shadow-sm p-3">
+                <h5>Pending</h5>
+                <p class="fs-4 text-warning">{{ pending_requests }}</p>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <div class="card shadow-sm p-3">
+                <h5>Approved</h5>
+                <p class="fs-4 text-success">{{ approved_requests }}</p>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+            <div class="card shadow-sm p-3">
+                <h5>Rejected</h5>
+                <p class="fs-4 text-danger">{{ rejected_requests }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Fund Requests -->
+    <div class="card shadow-lg p-4 mb-4">
+        <h4>Recent Fund Requests</h4>
+        <table class="table table-bordered mt-3 table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Organization</th>
+                    <th>Amount</th>
+                    <th>Reason</th>
+                    <th>Requested At</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in fund_requests %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.organization.name }}</td>
+                    <td>₹{{ request.amount_requested }}</td>
+                    <td>{{ request.reason }}</td>
+                    <td>{{ request.requested_at|date:"F j, Y, g:i a" }}</td>
+                    <td>
+                        <span class="badge 
+                            {% if request.status == 'PENDING' %} bg-warning text-dark 
+                            {% elif request.status == 'APPROVED' %} bg-success 
+                            {% elif request.status == 'REJECTED' %} bg-danger 
+                            {% endif %}">
+                            {{ request.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{% url 'review_fund_requests' request.id %}" class="btn btn-sm btn-primary">Review</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center">No pending requests.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="card shadow-lg p-4 mb-4">
+        <h4>Recent Transactions</h4>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Organization</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tx in transactions %}
+                <tr>
+                    <td>{{ tx.id }}</td>
+                    <td>{{ tx.organization.name }}</td>
+                    <td>
+                        <span class="badge 
+                            {% if tx.transaction_type == 'Credit' %} bg-success 
+                            {% else %} bg-danger 
+                            {% endif %}">
+                            {{ tx.transaction_type }}
+                        </span>
+                    </td>
+                    <td>₹{{ tx.amount }}</td>
+                    <td>{{ tx.description|default:"-" }}</td>
+                    <td>{{ tx.timestamp|date:"F j, Y, g:i a" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No transactions found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Org-wise Fund Allocation -->
+    <!-- <div class="card shadow-lg p-4 mb-5"> 
+        <h4>Funds Allocated by Organization</h4>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Organization</th>
+                    <th>Total Allocated Funds</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in org_fund_data %}
+                <tr>
+                    <td>{{ entry.allocated_to__name|default:"N/A" }}</td>
+                    <td>₹{{ entry.total_funds }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" class="text-center">No allocations yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> -->
+    <!-- Fund Usage by Organization -->
+<div class="card shadow-lg p-4 mb-5">
+    <h4>Fund Usage by Organization</h4>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Organization</th>
+                <th>Allocated (₹)</th>
+                <th>Used (₹)</th>
+                <th>Remaining (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in fund_usage_data %}
+            <tr>
+                <td>{{ entry.organization }}</td>
+                <td>₹{{ entry.allocated }}</td>
+                <td>₹{{ entry.used }}</td>
+                <td>₹{{ entry.remaining }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No data found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</div>
+{% endblock %}

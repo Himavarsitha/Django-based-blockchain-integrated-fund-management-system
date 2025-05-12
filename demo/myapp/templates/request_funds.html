@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Request Funds{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-4">
+                <h2 class="text-center mb-4">Request Funds</h2>
+
+                <!-- Display Messages -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.amount_requested.label_tag }}
+                        {{ form.amount_requested }}
+                        {% if form.amount_requested.errors %}
+                            <div class="text-danger">{{ form.amount_requested.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.reason.label_tag }}
+                        {{ form.reason }}
+                        {% if form.reason.errors %}
+                            <div class="text-danger">{{ form.reason.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Submit Request</button>
+                </form>
+
+                <p class="text-center mt-3">
+                    <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}Organization Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Organization Dashboard</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card p-3 shadow">
+                <h4>Available Funds: ₹{{ organization.available_funds }}</h4>
+                <a href="{% url 'request_funds' %}" class="btn btn-success mt-2">Request Funds</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Organization Fund Requests (to State Government) -->
+    <h3 class="mt-4">Fund Requests (to State Government)</h3>
+    <table class="table table-striped mt-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Amount Requested</th>
+                <th>Status</th>
+                <th>Reason</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in fund_requests %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>₹{{ request.amount_requested }}</td>
+                    <td>
+                        {% if request.status == "APPROVED" %}
+                            <span class="badge bg-success">{{ request.status }}</span>
+                        {% elif request.status == "REJECTED" %}
+                            <span class="badge bg-danger">{{ request.status }}</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">{{ request.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ request.reason }}</td>
+                    <td>{{ request.requested_at }}</td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="5" class="text-center">No fund requests yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- User Fund Requests -->
+    <h3 class="mt-4">User Fund Requests</h3>
+    <table class="table table-striped mt-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Amount Requested</th>
+                <th>Status</th>
+                <th>Reason</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in user_fund_requests %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>₹{{ request.amount }}</td>
+                    <td>
+                        {% if request.status == "Approved" %}
+                            <span class="badge bg-success">{{ request.status }}</span>
+                        {% elif request.status == "Rejected" %}
+                            <span class="badge bg-danger">{{ request.status }}</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">{{ request.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ request.reason }}</td>
+                    <td>{{ request.created_at }}</td>
+                    <td>
+                        {% if request.status == "Pending" %}
+                            <a href="{% url 'approve_or_reject_user_fund' request.id 'Approved' %}" class="btn btn-success btn-sm">Approve</a>
+                            <a href="{% url 'approve_or_reject_user_fund' request.id 'Rejected' %}" class="btn btn-danger btn-sm">Reject</a>
+                        {% else %}
+                            <span class="text-muted">Reviewed</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="6" class="text-center">No user fund requests yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Transactions -->
+    <h3 class="mt-4">Transactions</h3>
+    <table class="table table-striped mt-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.transaction_type }}</td>
+                    <td>₹{{ transaction.amount }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.timestamp }}</td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="5" class="text-center">No transactions yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+{% endblock %}

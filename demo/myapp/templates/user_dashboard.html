@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}User Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">User Dashboard</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card p-3 shadow">
+                <h4>Request Funds from Organizations</h4>
+                <a href="{% url 'user_fund_request' %}" class="btn btn-success mt-2">Request Funds</a>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mt-4">Your Fund Requests</h3>
+    <table class="table table-striped mt-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Organization</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Reason</th>
+                <th>Rejection Reason</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.organization.name }}</td>
+                    <td>₹{{ request.amount }}</td>
+                    <td>{{ request.status }}</td>
+                    <td>{{ request.reason }}</td>
+                    <td>{{ request.rejection_reason|default:'-' }}</td>
+                    <td>{{ request.created_at|date:"d M Y H:i" }}</td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="7" class="text-center">No fund requests yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- <h3 class="mt-4">Transactions</h3> 
+    <table class="table table-striped mt-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.transaction_type }}</td>
+                    <td>₹{{ transaction.amount }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.timestamp }}</td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="5" class="text-center">No transactions yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>-->
+</div>
+{% endblock %}
